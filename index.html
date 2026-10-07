@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Library Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">📚</div>
+        <div>
+          <h2>CloudLib</h2>
+          <span>Library Management</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-section="dashboard">📊 Dashboard</button>
+        <button class="nav-item" data-section="books">📚 Books</button>
+        <button class="nav-item" data-section="members">👥 Members</button>
+        <button class="nav-item" data-section="transactions">🔄 Transactions</button>
+        <button class="nav-item" data-section="reports">📈 Reports</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="cloud-status"><span></span> Cloud Sync Ready</div>
+        <button id="resetData" class="danger-outline">Reset Demo Data</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+          <p>Manage your library from one place.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">A</div>
+          <div><strong>Administrator</strong><small>Library Admin</small></div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="section active">
+        <div class="cards">
+          <div class="stat-card"><span class="stat-icon blue">📚</span><div><span>Total Books</span><strong id="totalBooks">0</strong></div></div>
+          <div class="stat-card"><span class="stat-icon green">✓</span><div><span>Available</span><strong id="availableBooks">0</strong></div></div>
+          <div class="stat-card"><span class="stat-icon orange">↗</span><div><span>Issued Books</span><strong id="issuedBooks">0</strong></div></div>
+          <div class="stat-card"><span class="stat-icon purple">👥</span><div><span>Members</span><strong id="totalMembers">0</strong></div></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-head"><h3>Recent Transactions</h3><button class="link-btn" data-go="transactions">View all</button></div>
+            <div id="recentTransactions" class="table-wrap"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>Popular Books</h3></div>
+            <div id="popularBooks"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="books" class="section">
+        <div class="section-head">
+          <div><h2>Books</h2><p>Add, search and manage library books.</p></div>
+          <button class="primary-btn" id="addBookBtn">+ Add Book</button>
+        </div>
+        <div class="toolbar">
+          <input id="bookSearch" type="search" placeholder="Search by title, author, ISBN or category...">
+          <select id="bookCategoryFilter"><option value="">All Categories</option></select>
+        </div>
+        <div class="panel"><div id="booksTable" class="table-wrap"></div></div>
+      </section>
+
+      <section id="members" class="section">
+        <div class="section-head">
+          <div><h2>Members</h2><p>Manage registered library members.</p></div>
+          <button class="primary-btn" id="addMemberBtn">+ Add Member</button>
+        </div>
+        <div class="toolbar"><input id="memberSearch" type="search" placeholder="Search by name, email or member ID..."></div>
+        <div class="panel"><div id="membersTable" class="table-wrap"></div></div>
+      </section>
+
+      <section id="transactions" class="section">
+        <div class="section-head">
+          <div><h2>Transactions</h2><p>Issue and return books.</p></div>
+          <button class="primary-btn" id="issueBookBtn">+ Issue Book</button>
+        </div>
+        <div class="toolbar">
+          <input id="transactionSearch" type="search" placeholder="Search transactions...">
+          <select id="transactionFilter">
+            <option value="">All</option><option value="Issued">Issued</option><option value="Returned">Returned</option>
+          </select>
+        </div>
+        <div class="panel"><div id="transactionsTable" class="table-wrap"></div></div>
+      </section>
+
+      <section id="reports" class="section">
+        <div class="section-head"><div><h2>Reports</h2><p>Quick library statistics and collection summary.</p></div></div>
+        <div class="report-grid">
+          <div class="report-box"><span>Collection Size</span><strong id="reportBooks">0</strong><small>Total registered books</small></div>
+          <div class="report-box"><span>Active Loans</span><strong id="reportLoans">0</strong><small>Books currently issued</small></div>
+          <div class="report-box"><span>Members</span><strong id="reportMembers">0</strong><small>Registered members</small></div>
+          <div class="report-box"><span>Overdue</span><strong id="reportOverdue">0</strong><small>Loans past due date</small></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Books by Category</h3></div>
+          <div id="categoryReport"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head"><h3 id="modalTitle">Add</h3><button id="closeModal">×</button></div>
+      <form id="modalForm"></form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
